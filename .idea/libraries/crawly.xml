@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="crawly" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/crawly/ebin" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/crawly/lib" />
+    </SOURCES>
+  </library>
+</component>
