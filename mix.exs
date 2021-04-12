@@ -43,6 +43,11 @@ defmodule GenericFinderServer.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"}
+<<<<<<< HEAD
+=======
+      {:crawly, "~> 0.13.0"},
+      {:floki, "~> 0.26.0"}
+>>>>>>> parent of b8fe246 (error)
     ]
   end
 
