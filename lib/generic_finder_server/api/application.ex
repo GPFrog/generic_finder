@@ -6,8 +6,13 @@ defmodule GenericFinderServer.Application do
   use Application
 
   def start(_type, _args) do
+    #이거 추가
+    import Supervisor.Spec
+
     # List all child processes to be supervised
     children = [
+      #nodeJS용 추가
+      supervisor(NodeJS, [[path: "node", pool_size: 4]]),
       # Start the Ecto repository
       GenericFinderServer.Repo,
       # Start the endpoint when the application starts
