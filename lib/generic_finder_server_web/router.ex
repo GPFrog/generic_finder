@@ -18,9 +18,9 @@ defmodule GenericFinderServerWeb.Router do
 
     get "/", PageController, :index
 
-    get "/query", DbController, :query
+    get "/query", PageController, :query
 
-    get "/api", ApiController, :api
+    get "/api", PageController, :api
   end
 
   # Other scopes may use custom stacks.

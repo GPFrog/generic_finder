@@ -1,6 +1,5 @@
 <section class="phx-hero">
-
-    <h1>결과는 : , <%= @result %> 입니다!</h1>
+    <h1>결과는 : < <%= @result %> > 입니다!</h1>
 </section>
 
 <section class="row">
