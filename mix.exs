@@ -33,6 +33,8 @@ defmodule GenericFinderServer.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      #node js용 설치(대기)
+      {:nodejs, "~> 2.0"},
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
@@ -43,10 +45,13 @@ defmodule GenericFinderServer.MixProject do
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
+      #json처리용 설치(대기)
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:crawly, "~> 0.13.0"},
-      {:floki, "~> 0.26.0"}
+      {:floki, "~> 0.26.0"},
+      #xml처리기
+      {:elixir_xml_to_map, "~> 2.0"}
     ]
   end
 
