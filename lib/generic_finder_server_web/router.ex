@@ -22,7 +22,7 @@ defmodule GenericFinderServerWeb.Router do
 
     get "/api", PageController, :api
   end
-
+  
   # Other scopes may use custom stacks.
   # scope "/api", GenericFinderServerWeb do
   #   pipe_through :api
