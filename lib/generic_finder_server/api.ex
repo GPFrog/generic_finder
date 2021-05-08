@@ -24,22 +24,22 @@ defmodule GenericFinderServer.Api do
         #     IO.puts "Body : #{inspect body}"
         # end
 
-        def callApi do
-            url = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductList"
-            <> "?ServiceKey=82RghzhLBOKluQ4%2BruQ%2FMgzMOuO8fpCtgk23n8kDm%2BrbpjWSVA520gLHKsa%2BHAragYtt%2BpNSaaUa0WWqCcRGOw%3D%3D"
-            <> ""
-            # "https://jsonplaceholder.typicode.com/todos"
-
-            {:ok, result} = HTTPoison.get url
-            IO.puts(result)
-            xml = XmlToMap.naive_map(result)
-            xmlResult = map[body:]
-            IO.puts(xmlResult)
-            #   {:ok,%{body: body, status_code: status_code}} ->
-            #       bodyProc(status_code, body)
-            #   {:error, error} ->
-            #       IO.puts "오류 발생 : #{inspect error}"
-            
-        end
+#        def callApi do
+#            url = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService1/getMdcinPrductList"
+#            <> "?ServiceKey=82RghzhLBOKluQ4%2BruQ%2FMgzMOuO8fpCtgk23n8kDm%2BrbpjWSVA520gLHKsa%2BHAragYtt%2BpNSaaUa0WWqCcRGOw%3D%3D"
+#            <> ""
+#            # "https://jsonplaceholder.typicode.com/todos"
+#
+#            {:ok, result} = HTTPoison.get url
+#            IO.puts(result)
+#            xml = XmlToMap.naive_map(result)
+#            xmlResult = map[body:]
+#            IO.puts(xmlResult)
+#            #   {:ok,%{body: body, status_code: status_code}} ->
+#            #       bodyProc(status_code, body)
+#            #   {:error, error} ->
+#            #       IO.puts "오류 발생 : #{inspect error}"
+#
+#        end
     end
 end

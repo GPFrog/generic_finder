@@ -24,7 +24,7 @@ defmodule GenericFinderServer do
     ]
   end
 
-  def get_med__info(itemSeq) do
+  def get_med_info(itemSeq) do
     response = Crawly.fetch(medicine_url()<>itemSeq)
     {:ok, document} = Floki.parse_document(response.body)
     (document |> Floki.find(".s-dr_table.dr_table_type1 tr") |> Floki.text()) #기본 정보
@@ -35,7 +35,7 @@ defmodule GenericFinderServer do
   end
 
   def get_pharm_info(businessNum) do
-    response = Crawly.fetch(business_url() <> businessNum)
+    response = Crawly.fetch(businessNum_url() <> businessNum)
     {:ok, document} = Floki.parse_document(response.body)
     (document |> Floki.find(".table_guide01 tr") |> Floki.text()) #가게 명
     <> "\n" <> (document |> Floki.find("tr") |> Floki.text() |> String.split("회사주소", parts: 2)

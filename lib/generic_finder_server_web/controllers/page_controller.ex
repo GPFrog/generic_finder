@@ -16,4 +16,13 @@ defmodule GenericFinderServerWeb.PageController do
     |> assign(:result, GenericFinderServer.Api.Call.callApi)
     |> render("api.html")
   end
+
+  def medicineDetail(conn, %{"medicineCode" => medicineCode}) do
+    #detail = GenericFinderServer.get_med_info(medicineCode)
+    json conn, GenericFinderServer.get_med_info(medicineCode)
+  end
+
+  def pharmacy(conn, %{"businessNum" => businessNum}) do
+    json conn, GenericFinderServer.get_pharm_info(businessNum)
+  end
 end
