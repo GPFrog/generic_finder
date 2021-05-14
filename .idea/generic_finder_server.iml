@@ -78,5 +78,9 @@
     <orderEntry type="library" name="jazz" level="project" />
     <orderEntry type="library" name="postgrex" level="project" />
     <orderEntry type="library" name="myxql" level="project" />
+    <orderEntry type="library" name="nodejs" level="project" />
+    <orderEntry type="library" name="elixir_xml_to_map" level="project" />
+    <orderEntry type="library" name="poolboy" level="project" />
+    <orderEntry type="library" name="erlsom" level="project" />
   </component>
 </module>
