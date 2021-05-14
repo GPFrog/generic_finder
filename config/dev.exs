@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :generic_finder_server, GenericFinderServer.Repo,
-  username: "dsh",
-  password: "dsh12",
+  username: "cys",
+  password: "cys12",
   database: "generic_finder",
   hostname: "193.123.244.100",
   show_sensitive_data_on_connection_error: true,

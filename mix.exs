@@ -49,7 +49,7 @@ defmodule GenericFinderServer.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:crawly, "~> 0.13.0"},
-      {:floki, "~> 0.30.0"},
+      {:floki, "~> 0.26.0"},
       #xml처리기
       {:elixir_xml_to_map, "~> 2.0"}
     ]

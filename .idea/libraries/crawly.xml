@@ -2,7 +2,9 @@
   <library name="crawly" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/crawly/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/crawly/ebin" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/deps/crawly/lib" />
     </SOURCES>
