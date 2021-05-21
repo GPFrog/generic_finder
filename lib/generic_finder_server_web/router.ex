@@ -17,6 +17,13 @@ defmodule GenericFinderServerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    get "/query", PageController, :query
+
+    get "/api", PageController, :api
+
+    get "/medicineDetail", PageController, :medicineDetail
+    get "/pharmacy", PageController, :pharmacy
   end
 
   # Other scopes may use custom stacks.
