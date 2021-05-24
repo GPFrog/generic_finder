@@ -23,6 +23,10 @@ defmodule GenericFinderServer.DbModel do
             eMail = column2["eMail"]
             passwd = column2["passwd"]
             result = "authority : " <> authority <> ", eMail : " <> eMail <> ", passwd : " <> passwd
+
+
+
+            
         end
 
 

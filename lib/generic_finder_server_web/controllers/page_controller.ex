@@ -16,4 +16,9 @@ defmodule GenericFinderServerWeb.PageController do
     |> assign(:result, GenericFinderServer.Api.Call.callApi)
     |> render("api.html")
   end
+
+  def login(conn, %{"id" => id, "password" => password}) do
+    GenericFinderServer.Login.Check.login(id, password)
+  end
+
 end

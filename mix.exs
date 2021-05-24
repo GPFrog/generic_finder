@@ -51,7 +51,9 @@ defmodule GenericFinderServer.MixProject do
       {:crawly, "~> 0.13.0"},
       {:floki, "~> 0.26.0"},
       #xml처리기
-      {:elixir_xml_to_map, "~> 2.0"}
+      {:elixir_xml_to_map, "~> 2.0"},
+      #이메일인증용
+      {:gmail, "~> 0.1"}
     ]
   end
 
