@@ -1,3 +1,3 @@
 defmodule Email do
-    use Bamboo.Phoenix, view: MyApp.EmailView
+    use Bamboo.Phoenix, view: GenericFinderServerWeb.Views.EmailView
   end

@@ -1,3 +1,3 @@
-defmodule MyApp.EmailView do
-    use MyApp.Web, :view
+defmodule GenericFinderServerWeb.EmailView do
+    use GenericFinderServerWeb.Web, :view
   end

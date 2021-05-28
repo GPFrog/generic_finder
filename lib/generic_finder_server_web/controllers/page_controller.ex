@@ -22,7 +22,7 @@ defmodule GenericFinderServerWeb.PageController do
   # 미구현
   def email(conn, _params) do
     conn
-    |> assign(:result, GenericFinderServer.Email.Certification.cert)
+    |> assign(:result, GenericFinderServer.Email.Email.send)
     |> render("email.html")
   end
 

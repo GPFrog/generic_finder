@@ -4,9 +4,9 @@ defmodule GenericFinderServer.Email do
         def send(email_address) do
             new_email
             |> to(email_address)
-            |> from("us@example.com")
-            |> subject("Welcome!")
-            |> text_body("Welcome to MyApp!")
+            |> from("tngh147258@naver.com")
+            |> subject("Email_authentication")
+            |> text_body("testing")
         end
     end
 end
