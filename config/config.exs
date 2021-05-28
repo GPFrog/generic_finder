@@ -25,6 +25,16 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# 이메일 인증을 위한 configuration
+config :gmail, :oauth2,
+  client_id: "clientID",
+  client_secret: "client"
+
+#이메일 인증에서 refresh token
+config :gmail, :refresh_token, "1//04jUx1cc4d5YRCgYIARAAGAQSNwF-L9Ir0GwTTHKImt7hH8XOwN4X4zkUDgz4AHA-7-QGeKjH3Gz3ZTurKqS5jVZkPcN6wHJl9Xw"
+
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+

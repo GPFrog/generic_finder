@@ -22,9 +22,14 @@ defmodule GenericFinderServerWeb.Router do
 
     get "/api", PageController, :api
 
-    get "/login", PageController, :login
+    get "/signin", PageController, :signin
+
+    get "/signup", PageController, :signup
+
+    get "/withdraw", PageController, :withdraw
 
     get "/email", PageController, :email
+    
   end
   
   # Other scopes may use custom stacks.

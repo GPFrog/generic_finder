@@ -20,7 +20,8 @@ defmodule GenericFinderServer.MixProject do
   def application do
     [
       mod: {GenericFinderServer.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
+      extra_applications: [:logger, :gmail]
     ]
   end
 
@@ -46,7 +47,9 @@ defmodule GenericFinderServer.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       #json처리용 설치(대기)
-      {:jason, "~> 1.0"},
+      # {:jason, "~> 1.0"},
+      #json처리용
+      {:poison, "~> 3.1"},
       {:plug_cowboy, "~> 2.0"},
       {:crawly, "~> 0.13.0"},
       {:floki, "~> 0.26.0"},

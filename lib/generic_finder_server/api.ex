@@ -21,6 +21,7 @@ defmodule GenericFinderServer.Api do
 
             #정보별로 리스트 생성
             cancelDate = Enum.map(item, fn (x) -> x["CANCEL_DATE"] end)
+            List.insert_at(["cancelDate"], String.to_integer("0"), cancelDate)
             cancelName = Enum.map(item, fn (x) -> x["CANCEL_NAME"] end)
             entpName = Enum.map(item, fn (x) -> x["ENTP_NAME"] end)
             induty = Enum.map(item, fn (x) -> x["INDUTY"] end)
@@ -35,8 +36,16 @@ defmodule GenericFinderServer.Api do
             prductType = Enum.map(item, fn (x) -> x["PRDUCT_TYPE"] end)
             spcltyPblc = Enum.map(item, fn (x) -> x["SPCLTY_PBLC"] end)
             
+            IO.puts cancelDate
+
+            # zip = Enum.zip(cancelDate, cancelName, entpName, induty, 
+            # itemIngrCnt, itemIngrName, itemName, itemPermitDate, itemSeq, 
+            # permitKindCode, prdlstStdrCode, prductPrmisnNo, prductType, spcltyPblc)
+
+            # result = Poison.encode!(zip)
             
-            IO.puts prductType
+            #이제 클라로 보내기
+            # result
         end
     end
 end

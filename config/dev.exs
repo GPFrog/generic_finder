@@ -75,3 +75,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# 이메일 인증을 위한 configuration
+config :gmail, :oauth2,
+  client_id: "clientID",
+  client_secret: "client"
+
+#이메일 인증에서 refresh token
+config :gmail, :refresh_token, "1//04jUx1cc4d5YRCgYIARAAGAQSNwF-L9Ir0GwTTHKImt7hH8XOwN4X4zkUDgz4AHA-7-QGeKjH3Gz3ZTurKqS5jVZkPcN6wHJl9Xw"

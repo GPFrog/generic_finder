@@ -11,7 +11,7 @@ defmodule GenericFinderServer.DbModel do
         def selectOne do
             query = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
-                "SELECT * from User",
+                "SELECT * from User where authority = 1",
                 []
             )
             
