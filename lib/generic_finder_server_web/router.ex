@@ -28,8 +28,9 @@ defmodule GenericFinderServerWeb.Router do
 
     get "/withdraw", PageController, :withdraw
 
-    get "/email", PageController, :email
+    get "/blacklist", PageController, :blacklist
     
+    get "/email", PageController, :email
   end
   
   # Other scopes may use custom stacks.

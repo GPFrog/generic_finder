@@ -83,18 +83,24 @@ defmodule GenericFinderServer.UserManagement do
 
                 result = "complete"
             end
-
-            # column = to_maps(query)
-            # column2 = hd column
-            
-            # authority = column2["authority"]
-            # eMail = column2["eMail"]
-            # passwd = column2["passwd"]
-            # result = "authority : " <> authority <> ", eMail : " <> eMail <> ", passwd : " <> passwd
-
-
         end
     end
 
-
+    defmodule Blacklist do
+        def blacklist(id) do
+            query = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "UPDATE User SET authority = 3 WHERE eMail = \"" <> id <> "\"",
+                []
+            )
+            %MyXQL.Result{num_rows: distinct} = query
+            if distinct == 0 do
+                # 등록실패
+                result = "error"
+            else
+                # 등록성공
+                result = "complete"
+            end
+        end
+    end
 end
