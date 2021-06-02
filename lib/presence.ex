@@ -3,5 +3,7 @@ defmodule GenericFinderServer.Presence do
     otp_app: :generic_finder,
     pubsub_server: GenericFinder.PubSub
 
-    def join()
+    def join() do
+
+  end
 end
