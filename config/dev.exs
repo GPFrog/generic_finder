@@ -7,7 +7,7 @@ config :generic_finder_server, GenericFinderServer.Repo,
   database: "generic_finder",
   hostname: "193.123.244.100",
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 50
 
 
 # For development, we disable any cache and enable
@@ -75,3 +75,5 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+import_config "dev.secret.exs"
