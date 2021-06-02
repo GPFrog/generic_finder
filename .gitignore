@@ -34,8 +34,4 @@ npm-debug.log
 /priv/static/
 
 #설정파일 제외
-mix.exs
-
-config.exs
-
-dev.exs
+/config

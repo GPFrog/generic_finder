@@ -20,9 +20,11 @@ defmodule GenericFinderServerWeb.PageController do
   end
 
   # 미구현
-  def email(conn, _params) do
+  def email(conn, %{"email" => email_address}) do
+    GenericFinderServer.Email.Email.send(email_address)
+    IO.puts "email sending success"
     conn
-    |> assign(:result, GenericFinderServer.Email.Email.send)
+    |> assign(:result, "ok")
     |> render("email.html")
   end
 
