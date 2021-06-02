@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="nodejs" type="mix">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/nodejs/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/nodejs/ebin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/nodejs/lib" />
+      <root url="file://$PROJECT_DIR$/deps/nodejs/priv" />
+    </SOURCES>
+  </library>
+</component>
