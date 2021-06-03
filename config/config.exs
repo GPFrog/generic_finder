@@ -13,7 +13,8 @@ config :generic_finder_server,
 # Configures the endpoint
 config :generic_finder_server, GenericFinderServerWeb.Endpoint,
   # url: [host: "localhost"],
-  http: [ip: {152,70,89,118}],
+  # http: [ip: {152,70,89,118}],
+  url: [host: "152.70.89.118", port: 4321]
   secret_key_base: "6DDce4q+UeUeDcUO21cIfNbERgTElqklc2+nj2Y7ixLQkrHBvr0ZFDUIp6AqwS6P",
   render_errors: [view: GenericFinderServerWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: GenericFinderServer.PubSub, adapter: Phoenix.PubSub.PG2]
