@@ -18,12 +18,12 @@ defmodule GenericFinderServerWeb.PageController do
   end
 
   def medicineDetail(conn, %{"medicineCode" => medicineCode}) do
-    json conn, GenericFinderServer.Test.crawl(medicineCode)
+    json conn, GenericFinderServer.Test.start(medicineCode, :medicine)
     #json conn, GenericFinderServer.get_med_info(medicineCode)
   end
 
   def pharmacy(conn, %{"businessNum" => businessNum}) do
-    GenericFinderServer.Test.crawl(businessNum)
+    json conn, GenericFinderServer.Test.start(businessNum, :pharmacy)
     #json conn, GenericFinderServer.get_pharm_info(businessNum)
   end
 end

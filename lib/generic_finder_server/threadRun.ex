@@ -16,16 +16,16 @@ defmodule GenericFinderServer.Test do
 #    end)
 #  end
 
-  def start(i) do
-    async_call_square_root(i)
+  def start(i, flag) do
+    async_crawl(i, flag)
     |> await_and_inspect()
   end
 
-  defp async_call_square_root(i) do
+  defp async_crawl(i, flag) do
     Task.async(fn ->
       :poolboy.transaction(
         :worker,
-        fn pid -> GenServer.call(pid, {:square_root, i}) end,
+        fn pid -> GenServer.call(pid, {flag, i}) end,
         @timeout
       )
     end)
