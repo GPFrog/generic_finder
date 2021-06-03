@@ -34,4 +34,4 @@ npm-debug.log
 /priv/static/
 
 #설정파일 제외
-/config
+# /config

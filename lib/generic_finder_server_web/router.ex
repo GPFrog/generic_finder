@@ -31,6 +31,8 @@ defmodule GenericFinderServerWeb.Router do
     get "/blacklist", PageController, :blacklist
     
     get "/email", PageController, :email
+
+    get "/certification", PageController, :certification
   end
   
   # Other scopes may use custom stacks.

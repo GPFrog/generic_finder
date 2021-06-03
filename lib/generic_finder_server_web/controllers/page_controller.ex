@@ -12,20 +12,26 @@ defmodule GenericFinderServerWeb.PageController do
     |> render("query.html")
   end
 
-  # 클라 보내기 미완성
+  # api사용 예시파일
   def api(conn, _params) do
     conn
     |> assign(:result, GenericFinderServer.Api.Call.callApi)
     |> render("api.html")
   end
 
-  # 미구현
   def email(conn, %{"email" => email_address}) do
-    GenericFinderServer.Email.Email.send(email_address)
-    IO.puts "email sending success"
+    GenericFinderServer.Email.Email.send(conn, email_address)
     conn
     |> assign(:result, "ok")
     |> render("email.html")
+  end
+
+  #미구현
+  def certification(conn, %{"code" => code}) do
+    result = GenericFinderServer.Email.Email.certification(conn, code)
+    conn
+    |> assign(:result, result)
+    |> render("certification.html")
   end
 
   def signin(conn, %{"id" => id, "password" => password}) do
