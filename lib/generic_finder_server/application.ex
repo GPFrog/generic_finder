@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<<<<<<<< HEAD:lib/generic_finder_server/application.ex
+=======
+>>>>>>> Yeseung
 defmodule GenericFinderServer.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
@@ -5,16 +9,28 @@ defmodule GenericFinderServer.Application do
 
   use Application
 
+  defp poolboy_config do
+    [
+      name: {:local, :worker},
+      worker_module: Worker,
+      size: 5,
+      max_overflow: 2
+    ]
+  end
+
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
       # Start the Ecto repository
       GenericFinderServer.Repo,
-      # Start the endpoint when the application starts
+      # Start the Telemetry supervisor
+      GenericFinderServerWeb.Telemetry,
+      # Start the PubSub system
+#      {Phoenix.PubSub, name: GenericFinderServer.PubSub},
+      # Start the Endpoint (http/https)
       GenericFinderServerWeb.Endpoint,
-      # Starts a worker by calling: GenericFinderServer.Worker.start_link(arg)
-      # {GenericFinderServer.Worker, arg},
-
+      # Start a worker by calling: GenericFinderServer.Worker.start_link(arg)
+      # {GenericFinderServer.Worker, arg}
+      :poolboy.child_spec(:worker, poolboy_config())
     ]
 
     table = :ets.new(:user, [:set, :public, :named_table])
@@ -32,6 +48,4 @@ defmodule GenericFinderServer.Application do
     GenericFinderServerWeb.Endpoint.config_change(changed, removed)
     :ok
   end
-
-
 end

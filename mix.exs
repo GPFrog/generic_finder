@@ -20,7 +20,7 @@ defmodule GenericFinderServer.MixProject do
   def application do
     [
       mod: {GenericFinderServer.Application, []},
-      extra_applications: [:logger, :runtime_tools, 
+      extra_applications: [:logger, :runtime_tools,
       :bamboo, :bamboo_smtp
       ]
     ]
@@ -50,7 +50,7 @@ defmodule GenericFinderServer.MixProject do
       #json처리용
       {:poison, "~> 3.1", override: true},
       {:plug_cowboy, "~> 2.0"},
-      {:crawly, "~> 0.13.0", override: true},
+      {:crawly, "~> 0.13.0"},
       {:floki, "~> 0.26.0"},
       #xml처리기
       {:elixir_xml_to_map, "~> 2.0"},
@@ -62,6 +62,8 @@ defmodule GenericFinderServer.MixProject do
       # {:phoenix_pubsub, "~> 1.0", override: true},
       # {:postgrex, ">= 0.0.0"},
       # {:cowboy, "~> 1.0", override: true}
+      {:elixir_xml_to_map, "~> 2.0"},
+      {:poolboy, "~> 1.5.1"}
     ]
   end
 

@@ -39,4 +39,8 @@ defmodule GenericFinderServer do
     <> "\n" <> (document |> Floki.find("tr") |> Floki.text() |> String.split("회사주소", parts: 2)
                 |> List.last() |> String.split("결산월") |> List.first())
   end
+
+  crawlFlag = %{
+    medicine: 0,
+    pharmacy: 1,}
 end
