@@ -14,7 +14,7 @@ defmodule GenericFinderServer.UserManagement do
 
             unless distinct == 0 do
                 # 이미 존재
-                result = "duplication"
+                "duplication"
             else
                 # 존재하지 않음
                 query = Ecto.Adapters.SQL.query!(
@@ -22,8 +22,7 @@ defmodule GenericFinderServer.UserManagement do
                     "INSERT INTO User(eMail, passwd, authority) VALUES (\""<> id <> "\", \""<> password <>"\", 1)",
                     []
                 )
-                
-                result = "ok"
+                "ok"
             end
         end
     end
@@ -39,26 +38,12 @@ defmodule GenericFinderServer.UserManagement do
             %MyXQL.Result{num_rows: distinct} = query
             if distinct == 0 do
                 # 일치하지 않음
-                result = "error"
+                "error"
             else
                 # 일치함
-                result = "ok"
+                "ok"
             end
-
-            # column = to_maps(query)
-            # column2 = hd column
-
-            # IO.puts column2
-
         end
-
-        # def to_maps(%MyXQL.Result{columns: columns  , rows: rows}) do
-        #     Enum.map(rows, fn row ->
-        #       columns
-        #       |> Enum.zip(row)
-        #       |> Enum.into(%{})
-        #     end)
-        # end
     end
 
     defmodule Withdraw do
@@ -72,7 +57,7 @@ defmodule GenericFinderServer.UserManagement do
             %MyXQL.Result{num_rows: distinct} = query
             if distinct == 0 do
                 # 일치하지 않음
-                result = "error"
+                "error"
             else
                 # 일치함
                 query = Ecto.Adapters.SQL.query!(
@@ -81,7 +66,7 @@ defmodule GenericFinderServer.UserManagement do
                     []
                 )
 
-                result = "complete"
+                "complete"
             end
         end
     end
@@ -96,10 +81,10 @@ defmodule GenericFinderServer.UserManagement do
             %MyXQL.Result{num_rows: distinct} = query
             if distinct == 0 do
                 # 등록실패
-                result = "error"
+                "error"
             else
                 # 등록성공
-                result = "complete"
+                "complete"
             end
         end
     end

@@ -26,7 +26,6 @@ defmodule GenericFinderServerWeb.PageController do
     |> render("email.html")
   end
 
-  #미구현
   def certification(conn, %{"code" => code}) do
     result = GenericFinderServer.Email.Email.certification(conn, code)
     conn
