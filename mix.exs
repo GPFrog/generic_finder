@@ -20,7 +20,9 @@ defmodule GenericFinderServer.MixProject do
   def application do
     [
       mod: {GenericFinderServer.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, 
+      :bamboo, :bamboo_smtp
+      ]
     ]
   end
 
@@ -45,13 +47,21 @@ defmodule GenericFinderServer.MixProject do
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
-      #json처리용 설치(대기)
-      {:jason, "~> 1.0"},
+      #json처리용
+      {:poison, "~> 3.1", override: true},
       {:plug_cowboy, "~> 2.0"},
-      {:crawly, "~> 0.13.0"},
+      {:crawly, "~> 0.13.0", override: true},
       {:floki, "~> 0.26.0"},
       #xml처리기
-      {:elixir_xml_to_map, "~> 2.0"}
+      {:elixir_xml_to_map, "~> 2.0"},
+      #이메일 인증용
+      {:bamboo, "~> 0.7.0", override: true},
+      {:bamboo_smtp, "~> 1.2.1"},
+      {:httpoison, "~> 1.8", override: true},
+      #이 밑으로 확인필요
+      # {:phoenix_pubsub, "~> 1.0", override: true},
+      # {:postgrex, ">= 0.0.0"},
+      # {:cowboy, "~> 1.0", override: true}
     ]
   end
 

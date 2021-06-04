@@ -11,7 +11,7 @@ defmodule GenericFinderServer.DbModel do
         def selectOne do
             query = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
-                "SELECT * from User",
+                "SELECT * from User where authority = 1",
                 []
             )
             
@@ -23,6 +23,10 @@ defmodule GenericFinderServer.DbModel do
             eMail = column2["eMail"]
             passwd = column2["passwd"]
             result = "authority : " <> authority <> ", eMail : " <> eMail <> ", passwd : " <> passwd
+
+
+
+            
         end
 
 

@@ -22,10 +22,22 @@ defmodule GenericFinderServerWeb.Router do
 
     get "/api", PageController, :api
 
+    get "/signin", PageController, :signin
+
+    get "/signup", PageController, :signup
+
+    get "/withdraw", PageController, :withdraw
+
+    get "/blacklist", PageController, :blacklist
+
+    get "/email", PageController, :email
+
+    get "/certification", PageController, :certification
+
     get "/medicineDetail", PageController, :medicineDetail
     get "/pharmacy", PageController, :pharmacy
   end
-
+  
   # Other scopes may use custom stacks.
   # scope "/api", GenericFinderServerWeb do
   #   pipe_through :api

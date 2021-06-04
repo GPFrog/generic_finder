@@ -6,9 +6,6 @@ defmodule GenericFinderServer.Application do
   use Application
 
   def start(_type, _args) do
-    #이거 추가
-    import Supervisor.Spec
-
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
@@ -19,6 +16,8 @@ defmodule GenericFinderServer.Application do
       # {GenericFinderServer.Worker, arg},
 
     ]
+
+    table = :ets.new(:user, [:set, :public, :named_table])
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
@@ -33,4 +32,6 @@ defmodule GenericFinderServer.Application do
     GenericFinderServerWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
+
 end
