@@ -125,5 +125,9 @@
     <orderEntry type="library" name="exjsx" level="project" />
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="jazz" level="project" />
+    <orderEntry type="library" name="nodejs" level="project" />
+    <orderEntry type="library" name="elixir_xml_to_map" level="project" />
+    <orderEntry type="library" name="poolboy" level="project" />
+    <orderEntry type="library" name="erlsom" level="project" />
   </component>
 </module>
