@@ -50,6 +50,9 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/metrics" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/decimal" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/idna" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/bamboo_smtp" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/bamboo" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/gen_smtp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -129,5 +132,10 @@
     <orderEntry type="library" name="elixir_xml_to_map" level="project" />
     <orderEntry type="library" name="poolboy" level="project" />
     <orderEntry type="library" name="erlsom" level="project" />
+    <orderEntry type="library" name="bamboo" level="project" />
+    <orderEntry type="library" name="bamboo_smtp" level="project" />
+    <orderEntry type="library" name="ex_machina" level="project" />
+    <orderEntry type="library" name="gen_smtp" level="project" />
+    <orderEntry type="library" name="dogma" level="project" />
   </component>
 </module>

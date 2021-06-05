@@ -26,10 +26,10 @@ defmodule GenericFinderServer do
     response = Crawly.fetch(medicine_url()<>itemSeq)
     {:ok, document} = Floki.parse_document(response.body)
     (document |> Floki.find(".s-dr_table.dr_table_type1 tr") |> Floki.text()) #기본 정보
-    <> "\n" <> (document |> Floki.find(".note") |> Floki.text()) #유효성분
-    <> "\n" <> (document |> Floki.find("#_ee_doc") |> Floki.text()) #효능효과
-    <> "\n" <> (document |> Floki.find("#_ud_doc") |> Floki.text()) #용법용량
-    <> "\n" <> (document |> Floki.find("#_nb_doc") |> Floki.text()) #사용상주의사항
+    <> (document |> Floki.find(".note") |> Floki.text()) #유효성분
+    <> (document |> Floki.find("#_ee_doc") |> Floki.text()) #효능효과
+    <> (document |> Floki.find("#_ud_doc") |> Floki.text()) #용법용량
+    <> (document |> Floki.find("#_nb_doc") |> Floki.text()) #사용상주의사항
   end
 
   def get_pharm_info(businessNum) do
@@ -40,7 +40,18 @@ defmodule GenericFinderServer do
                 |> List.last() |> String.split("결산월") |> List.first())
   end
 
-  crawlFlag = %{
-    medicine: 0,
-    pharmacy: 1,}
+  def get_med_effect(itemSeq) do
+    response = Crawly.fetch(medicine_url()<>itemSeq)
+    {:ok, document} = Floki.parse_document(response.body)
+    document |> Floki.find("#_ee_doc") |> Floki.text()
+  end
+
+  def get_med_img_path(itemSeq) do
+    response = Crawly.fetch(medicine_url()<>itemSeq)
+    {:ok, document} = Floki.parse_document(response.body)
+    document |> Floki.find(".pc-img img") |> Floki.raw_html()
+  end
+
+  #String 함수 이용해서 앞에 <img src=" 부터 == 만날때까지만 잘라서 저장
+
 end

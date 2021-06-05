@@ -17,7 +17,7 @@ config :generic_finder_server, GenericFinderServer.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :generic_finder_server, GenericFinderServerWeb.Endpoint,
-  http: [port: 4321, ip: {10,0,0,151}],
+  http: [port: 2833, ip: {192,168,0,3}],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
