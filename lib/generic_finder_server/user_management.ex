@@ -43,7 +43,7 @@ defmodule GenericFinderServer.UserManagement do
                 # 일치함
                 val = hd row |> hd
 
-                "{" <> "result: ok, value: " <> val <> "}"
+                "{" <> "\"result\": ok, \"value\": " <> val <> "}"
             end
         end
     end
@@ -67,7 +67,7 @@ defmodule GenericFinderServer.UserManagement do
                     "DELETE FROM User WHERE eMail = \"" <> id <> "\"",
                     []
                 )
-                "{result: ok}"
+                "{\"result\": ok}"
             end
         end
     end
