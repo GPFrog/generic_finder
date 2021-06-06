@@ -14,7 +14,7 @@ defmodule GenericFinderServer.UserManagement do
 
             unless distinct == 0 do
                 # 이미 존재
-                "{duplication}"
+                "{result: duplication}"
             else
                 # 존재하지 않음
                 query = Ecto.Adapters.SQL.query!(
@@ -22,7 +22,7 @@ defmodule GenericFinderServer.UserManagement do
                     "INSERT INTO User(eMail, passwd, authority) VALUES (\""<> id <> "\", \""<> password <>"\", 1)",
                     []
                 )
-                "{ok}"
+                "{result: ok}"
             end
         end
     end
@@ -38,7 +38,7 @@ defmodule GenericFinderServer.UserManagement do
             %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
                 # 일치하지 않음
-                "{error}"
+                "{result: error}"
             else
                 # 일치함
                 val = hd row |> hd
@@ -59,7 +59,7 @@ defmodule GenericFinderServer.UserManagement do
             %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
                 # 일치하지 않음
-                "{error}"
+                "{result: error}"
             else
                 # 일치함
                 query = Ecto.Adapters.SQL.query!(
@@ -67,7 +67,7 @@ defmodule GenericFinderServer.UserManagement do
                     "DELETE FROM User WHERE eMail = \"" <> id <> "\"",
                     []
                 )
-                "{ok}"
+                "{result: ok}"
             end
         end
     end
@@ -82,10 +82,10 @@ defmodule GenericFinderServer.UserManagement do
             %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
                 # 등록실패
-                "{error}"
+                "{result: error}"
             else
                 # 등록성공
-                "{ok}"
+                "{result: ok}"
             end
         end
     end
