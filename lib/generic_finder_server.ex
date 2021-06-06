@@ -37,21 +37,26 @@ defmodule GenericFinderServer do
     {:ok, document} = Floki.parse_document(response.body)
     (document |> Floki.find(".table_guide01 tr") |> Floki.text()) #가게 명
     <> "\n" <> (document |> Floki.find("tr") |> Floki.text() |> String.split("회사주소", parts: 2)
-                |> List.last() |> String.split("결산월") |> List.first())
+    |> List.last() |> String.split("결산월") |> List.first())
   end
 
   def get_med_effect(itemSeq) do
-    response = Crawly.fetch(medicine_url()<>itemSeq)
-    {:ok, document} = Floki.parse_document(response.body)
-    document |> Floki.find("#_ee_doc") |> Floki.text()
+      response = Crawly.fetch(medicine_url()<>itemSeq)
+      {:ok, document} = Floki.parse_document(response.body)
+      "\""<>(document |> Floki.find("#_ee_doc") |> Floki.text()) <> "\"\n"# <> itemSeq <> "\n"
+      #IO.write(file, contents)
   end
 
   def get_med_img_path(itemSeq) do
     response = Crawly.fetch(medicine_url()<>itemSeq)
     {:ok, document} = Floki.parse_document(response.body)
     document |> Floki.find(".pc-img img") |> Floki.raw_html()
+    |> get_base64_link()
   end
 
   #String 함수 이용해서 앞에 <img src=" 부터 == 만날때까지만 잘라서 저장
+  def get_base64_link(string) do
+    String.split(string, "\"") |> tl |> hd
+  end
 
 end

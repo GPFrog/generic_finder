@@ -53,6 +53,7 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/bamboo_smtp" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/bamboo" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/gen_smtp" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/json" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -137,5 +138,6 @@
     <orderEntry type="library" name="ex_machina" level="project" />
     <orderEntry type="library" name="gen_smtp" level="project" />
     <orderEntry type="library" name="dogma" level="project" />
+    <orderEntry type="library" name="dialyzex" level="project" />
   </component>
 </module>
