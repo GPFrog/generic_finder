@@ -35,7 +35,14 @@ defmodule GenericFinderServerWeb.Router do
     get "/certification", PageController, :certification
 
     get "/medicineDetail", PageController, :medicineDetail
+
     get "/pharmacy", PageController, :pharmacy
+
+    get "/medicinePriceEnroll", PageController, :medicinePriceEnroll
+
+    get "/medicinePriceDelete", PageController, :medicinePriceDelete
+
+    get "/medicinePriceLookup", PageController, :medicinePriceLookup
   end
   
   # Other scopes may use custom stacks.

@@ -62,7 +62,6 @@ defmodule GenericFinderServer.MixProject do
       # {:phoenix_pubsub, "~> 1.0", override: true},
       # {:postgrex, ">= 0.0.0"},
       # {:cowboy, "~> 1.0", override: true}
-      {:elixir_xml_to_map, "~> 2.0"},
       {:poolboy, "~> 1.5.1"}
     ]
   end

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<<< HEAD:lib/generic_finder_server/application.ex
-=======
->>>>>>> Yeseung
 defmodule GenericFinderServer.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
