@@ -31,17 +31,19 @@ defmodule GenericFinderServer.UserManagement do
         def signin(id, password) do
             query = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
-                "SELECT * FROM User WHERE eMail = \"" <> id <> "\" AND passwd = \"" <> password <> "\"",
+                "SELECT authority FROM User WHERE eMail = \"" <> id <> "\" AND passwd = \"" <> password <> "\"",
                 []
             )
 
-            %MyXQL.Result{num_rows: distinct} = query
+            %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
                 # 일치하지 않음
                 "error"
             else
                 # 일치함
-                "ok"
+                val = hd row |> hd
+
+                "{" <> "ok, " <> val <> "}"
             end
         end
     end
@@ -54,7 +56,7 @@ defmodule GenericFinderServer.UserManagement do
                 []
             )
 
-            %MyXQL.Result{num_rows: distinct} = query
+            %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
                 # 일치하지 않음
                 "error"
@@ -65,8 +67,7 @@ defmodule GenericFinderServer.UserManagement do
                     "DELETE FROM User WHERE eMail = \"" <> id <> "\"",
                     []
                 )
-
-                "complete"
+                "{ok}"
             end
         end
     end
@@ -78,13 +79,13 @@ defmodule GenericFinderServer.UserManagement do
                 "UPDATE User SET authority = 3 WHERE eMail = \"" <> id <> "\"",
                 []
             )
-            %MyXQL.Result{num_rows: distinct} = query
+            %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
                 # 등록실패
                 "error"
             else
                 # 등록성공
-                "complete"
+                "{ok}"
             end
         end
     end
