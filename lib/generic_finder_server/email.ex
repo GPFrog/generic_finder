@@ -6,7 +6,8 @@ defmodule GenericFinderServer.Email do
     def make_email(conn, email_address) do
       code = Randomizer.randomizer(10)
       :ets.insert(:user, {code, email_address, NaiveDateTime.utc_now})
-
+      get = :ets.lookup(:user, code)
+ 
       new_email(
         to: email_address,
         from: "tngh147258@gmail.com",
