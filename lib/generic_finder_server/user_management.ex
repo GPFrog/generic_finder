@@ -44,10 +44,6 @@ defmodule GenericFinderServer.UserManagement do
                 val = hd row |> hd
                 
                 "ok/" <> val
-                # IO.puts result2
-                # {status, result} = JSON.encode()
-                # List.wrap("{" <> "\"result\": ok, \"value\": " <> val <> "}")
-                
             end
         end
     end
@@ -86,10 +82,10 @@ defmodule GenericFinderServer.UserManagement do
             %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
                 # 등록실패
-                "error"
+                "false"
             else
                 # 등록성공
-                "ok"
+                "true"
             end
         end
     end

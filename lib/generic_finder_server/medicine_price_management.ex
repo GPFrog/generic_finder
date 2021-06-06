@@ -1,5 +1,6 @@
 defmodule GenericFinderServer.MedicinePriceManagement do
     defmodule PriceEnroll do
+        # medicine_code는 medicine_name으로 대체하고 name select해서 code 뽑아내고 그걸 insert하기
         def priceEnroll(email, medicine_code, price, bussiness_number) do
             current_time = NaiveDateTime.utc_now |> NaiveDateTime.to_date |> Date.to_string()
 
@@ -12,10 +13,10 @@ defmodule GenericFinderServer.MedicinePriceManagement do
             IO.puts distinct
             if distinct == 0 do
                 # 실패
-                "fail"
+                "false"
             else
                 # 성공
-                "success"
+                "true"
             end
         end
     end
@@ -60,14 +61,21 @@ defmodule GenericFinderServer.MedicinePriceManagement do
             )
             %MyXQL.Result{num_rows: distinct, rows: row} = query1
             val = hd row |> hd
-            IO.puts query1
-
+            IO.puts is_integer(val)
+            #여기서 문제
             query2 = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
-                "SELECT Pharmacy_bussinessNumber, price, User_eMail FROM User_has_Medicine WHERE Medicine_code = ",
+                "SELECT Pharmacy_bussinessNumber, price, User_eMail FROM User_has_Medicine WHERE Medicine_code=" <> Integer.to_string(val),
                 []
             )
+            %MyXQL.Result{num_rows: distinct, rows: row} = query2
+            tmp = hd row
+            tuple = List.to_tuple(tmp)
+            bnumber = elem(tuple, 0) |> Integer.to_string
+            price = elem(tuple, 1) |> Integer.to_string
+            uemail = elem(tuple, 2)
+
+            bnumber <> "/" <> price <> "/" <> uemail
         end
-        
     end
 end
