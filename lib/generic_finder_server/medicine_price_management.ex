@@ -58,6 +58,8 @@ defmodule GenericFinderServer.MedicinePriceManagement do
                 "SELECT code FROM Medicine WHERE name=\"" <> medicineName <> "\"",
                 []
             )
+            %MyXQL.Result{num_rows: distinct, rows: row} = query
+            val = hd row |> hd
 
 
             query2 = Ecto.Adapters.SQL.query!(
