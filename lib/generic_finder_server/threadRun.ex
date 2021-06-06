@@ -21,11 +21,58 @@ defmodule GenericFinderServer.Test do
     |> await_and_inspect()
   end
 
+
+
   defp async_crawl(i, flag) do
     Task.async(fn ->
       :poolboy.transaction(
         :worker,
         fn pid -> GenServer.call(pid, {flag, i}) end,
+        @timeout
+      )
+    end)
+  end
+
+  def start(i, j, flag) do
+    async_crawl(i, j, flag)
+    |> await_and_inspect()
+  end
+
+  defp async_crawl(i, j, flag) do
+    Task.async(fn ->
+      :poolboy.transaction(
+        :worker,
+        fn pid -> GenServer.call(pid, {flag, i, j}) end,
+        @timeout
+      )
+    end)
+  end
+
+  def start(i, j, k, flag) do
+    async_crawl(i, j, k, flag)
+    |> await_and_inspect()
+  end
+
+  defp async_crawl(i, j, k, flag) do
+    Task.async(fn ->
+      :poolboy.transaction(
+        :worker,
+        fn pid -> GenServer.call(pid, {flag, i, j, k}) end,
+        @timeout
+      )
+    end)
+  end
+
+  def start(i, j, k, l, flag) do
+    async_crawl(i, j, k, l, flag)
+    |> await_and_inspect()
+  end
+
+  defp async_crawl(i, j, k, l, flag) do
+    Task.async(fn ->
+      :poolboy.transaction(
+        :worker,
+        fn pid -> GenServer.call(pid, {flag, i, j, k, l}) end,
         @timeout
       )
     end)

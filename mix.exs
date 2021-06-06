@@ -48,6 +48,7 @@ defmodule GenericFinderServer.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       #json처리용
+      {:json, "~> 1.4"},
       {:poison, "~> 3.1", override: true},
       {:plug_cowboy, "~> 2.0"},
       {:crawly, "~> 0.13.0"},
@@ -62,7 +63,6 @@ defmodule GenericFinderServer.MixProject do
       # {:phoenix_pubsub, "~> 1.0", override: true},
       # {:postgrex, ">= 0.0.0"},
       # {:cowboy, "~> 1.0", override: true}
-      {:elixir_xml_to_map, "~> 2.0"},
       {:poolboy, "~> 1.5.1"}
     ]
   end

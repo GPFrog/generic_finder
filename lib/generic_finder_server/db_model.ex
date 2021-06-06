@@ -11,10 +11,10 @@ defmodule GenericFinderServer.DbModel do
         def selectOne do
             query = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
-                "SELECT * from User where authority = 1",
+                "SELECT eMail from User where authority = 1",
                 []
             )
-            
+            IO.puts query
             #나중에
             column = to_maps(query)
             column2 = hd column

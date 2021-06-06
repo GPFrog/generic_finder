@@ -8,7 +8,8 @@ defmodule GenericFinderServerWeb.PageController do
   # 쿼리문 예시파일
   def query(conn, _params) do
     conn
-    |> assign(:result, GenericFinderServer.DbModel.Queries.selectOne)
+    # |> assign(:result, GenericFinderServer.DbModel.Queries.selectOne)
+    |> assign(:result, GenericFinderServer.Pharmacy.Pharmacy.getPharmacy)
     |> render("query.html")
   end
 
@@ -20,41 +21,27 @@ defmodule GenericFinderServerWeb.PageController do
   end
 
   def email(conn, %{"email" => email_address}) do
-    GenericFinderServer.Email.Email.send(conn, email_address)
-    conn
-    |> assign(:result, "ok")
-    |> render("email.html")
+    json conn, GenericFinderServer.Test.start(conn, email_address, :email)
   end
 
   def certification(conn, %{"code" => code}) do
-    result = GenericFinderServer.Email.Email.certification(conn, code)
-    conn
-    |> assign(:result, result)
-    |> render("certification.html")
+    json conn, GenericFinderServer.Test.start(conn, code, :certification)
   end
 
   def signin(conn, %{"id" => id, "password" => password}) do
-    conn
-    |> assign(:result, GenericFinderServer.UserManagement.Signin.signin(id, password))
-    |> render("signin.html")
+    json conn, GenericFinderServer.Test.start(id, password, :signin)
   end
 
   def signup(conn, %{"id"=> id, "password" => password}) do
-    conn
-    |> assign(:result, GenericFinderServer.UserManagement.Signup.signup(id, password))
-    |> render("signup.html")
+    json conn, GenericFinderServer.Test.start(id, :signup)
   end
 
   def withdraw(conn, %{"id" => id}) do
-    conn
-    |> assign(:result, GenericFinderServer.UserManagement.Withdraw.withdraw(id))
-    |> render("withdraw.html")
+    json conn, GenericFinderServer.Test.start(id, :withdraw)
   end
 
   def blacklist(conn, %{"id" => id}) do
-    conn
-    |> assign(:result, GenericFinderServer.UserManagement.Blacklist.blacklist(id))
-    |> render("blacklist.html")
+    json conn, GenericFinderServer.Test.start(id, :blacklist)
   end
 
   def medicineDetail(conn, %{"medicineCode" => medicineCode}) do
@@ -66,4 +53,17 @@ defmodule GenericFinderServerWeb.PageController do
     json conn, GenericFinderServer.Test.start(businessNum, :pharmacy)
     #json conn, GenericFinderServer.get_pharm_info(businessNum)
   end
+
+  def medicinePriceEnroll(conn, %{"email" => email, "medicine_code" => medicine_code, "price" => price, "bussiness_number" => bussiness_number})do
+    json conn, GenericFinderServer.Test.start(email, medicine_code, price, bussiness_number, :medicinePriceEnroll)
+  end
+
+  # def medicinePriceDelete()do
+  #   json conn, GenericFinderServer.Test.start(medicineCode, :medicinePriceDelete)
+  # end
+
+  # def medicinePriceLookup(conn, medicineName) do
+  #   json conn, GenericFinderServer.Test.start(medicineName, :medicinePriceLookup)
+  # end
+  
 end
