@@ -13,12 +13,22 @@ defmodule GenericFinderServer.MedicineManagement do
     end
 
     # 제품명, 주성분, 제조사, 유효증상
-    # 제품명, 가격
-    # defmodule MedicineLookup do
-    #     def medicineLookup(name, ) do
-
-    #     end
-    # end
-
-    
+    # code, 제품명, 가격
+    defmodule MedicineLookup do
+        def medicineLookup(name, activeingredient, company, symptom) do
+            query = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT code, name, price FROM Medicine, Medicine_has_ActiveIngredient, Medicine_has_Symptom, Area_has_Medicine WHERE name LIKE \'%" <> name <> "%\' AND ActiveIngredient_name LIKE \'%" <> activeingredient <> "%\' AND Company_name LIKE \'%" <> company <> "%\' AND Symptom_name LIKE \'%" <> symptom <> "%\'",
+                # "SELECT * FROM Medicine", 
+                []
+            )
+            # IO.puts query
+            %MyXQL.Result{rows: row} = query
+            result = ""
+            val = hd row
+            #일단 row하나만 받았을 경우
+            tval = List.to_tuple(val)
+            Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
+        end
+    end
 end
