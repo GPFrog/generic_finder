@@ -62,8 +62,8 @@ defmodule GenericFinderServerWeb.PageController do
   #   json conn, GenericFinderServer.Test.start(medicineCode, :medicinePriceDelete)
   # end
 
-  def medicinePriceLookup(conn, medicineName) do
-    json conn, GenericFinderServer.Test.start(medicineName, :medicinePriceLookup)
-  end
+  # def medicinePriceLookup(conn, medicineName) do
+  #   json conn, GenericFinderServer.Test.start(medicineName, :medicinePriceLookup)
+  # end
   
 end

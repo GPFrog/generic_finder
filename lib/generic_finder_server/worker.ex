@@ -60,8 +60,8 @@ defmodule Worker do
   #   {:reply, GenericFinderServer.MedicinePriceManagement.PriceDelete.priceDelete(id), state}
   # end
 
-  # 약 가격 조회
-  def handle_call({:medicinePriceLookup, medicineName}, _from, state) do
-    {:reply, GenericFinderServer.MedicinePriceManagement.PriceLookup.priceLookup(medicineName), state}
-  end
+  # # 약 가격 조회
+  # def handle_call({:medicinePriceLookup, medicineName}, _from, state) do
+  #   {:reply, GenericFinderServer.MedicinePriceManagement.PriceLookup.priceLookup(medicineName), state}
+  # end
 end
