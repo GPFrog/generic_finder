@@ -36,7 +36,7 @@ defmodule GenericFinderServerWeb.Router do
 
     get "/medicineDetail", PageController, :medicineDetail
 
-    get "/pharmacy", PageController, :pharmacy
+    get "/medicine", PageController, :medicine
 
     get "/medicinePriceEnroll", PageController, :medicinePriceEnroll
 

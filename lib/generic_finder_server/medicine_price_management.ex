@@ -51,22 +51,23 @@ defmodule GenericFinderServer.MedicinePriceManagement do
 
     # request 약 이름
     # response 약국이름, 가격, 사용자이메일
-    # defmodule PriceLookup do
-    #     def priceLookup(medicineName) do
-    #         query1 = Ecto.Adapters.SQL.query!(
-    #             GenericFinderServer.Repo,
-    #             "SELECT code FROM Medicine WHERE name=\"" <> medicineName <> "\"",
-    #             []
-    #         )
-    #         %MyXQL.Result{num_rows: distinct, rows: row} = query
-    #         val = hd row |> hd
+    defmodule PriceLookup do
+        def priceLookup(medicineName) do
+            query1 = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT code FROM Medicine WHERE name=\"" <> medicineName <> "\"",
+                []
+            )
+            %MyXQL.Result{num_rows: distinct, rows: row} = query1
+            val = hd row |> hd
+            IO.puts query1
 
-
-    #         query2 = Ecto.Adapters.SQL.query!(
-    #             GenericFinderServer.Repo,
-    #             "SELECT Pharmacy_bussinessNumber, price, User_eMail FROM User_has_Medicine WHERE Medicine_code = ",
-    #             []
-    #         )
-    #     end
-    # end
+            query2 = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT Pharmacy_bussinessNumber, price, User_eMail FROM User_has_Medicine WHERE Medicine_code = ",
+                []
+            )
+        end
+        
+    end
 end
