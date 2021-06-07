@@ -52,6 +52,21 @@ defmodule Worker do
     {:reply, GenericFinderServer.UserManagement.Withdraw.withdraw(id), state}
   end
 
+  # 약 정보 조회
+  def handle_call({:medicineLookup, name, activeingredient, company, symptom}, _from, state) do
+    {:reply, GenericFinderServer.MedicineManagement.MedicineLookup.medicineLookup(name, activeingredient, company, symptom), state}
+  end
+
+  # 약 정보 조회 (이름)
+  def handle_call({:medicineLookup, name}, _from, state) do
+    {:reply, GenericFinderServer.MedicineManagement.MedicineLookup.medicineLookup(name), state}
+  end
+
+  # 약 정보 상세 조회
+  def handle_call({:medicineDetailLookup, code}, _from, state) do
+    {:reply, GenericFinderServer.MedicineManagement.MedicineDetailLookup.medicineDetailLookup(code), state}
+  end  
+
   # 약 가격 등록
   def handle_call({:medicinePriceEnroll, email, medicine_code, price, bussiness_number}, _from, state) do
     {:reply, GenericFinderServer.MedicinePriceManagement.PriceEnroll.priceEnroll(email, medicine_code, price, bussiness_number), state}

@@ -3,23 +3,11 @@ defmodule GenericFinderServer.Email do
     use Bamboo.Phoenix, view: GenericFinderServerWeb.Views.EmailView
     alias Randomizer
 
-    #세션 결국 값 저장 불러오기 못함
     def make_email(conn, email_address) do
       code = Randomizer.randomizer(10)
       :ets.insert(:user, {code, email_address, NaiveDateTime.utc_now})
       get = :ets.lookup(:user, code)
-      unless (get == []) do
-        tuple = hd get
-        # 여기서 if code랑 같은지 확인
-        save_code = elem(tuple, 0)
-        save_email = elem(tuple, 1)
-        save_time = elem(tuple, 2)
-        IO.puts save_code
-        IO.puts save_email
-        IO.puts save_time
-      else 
-        "incorrect code"
-      end
+ 
       new_email(
         to: email_address,
         from: "tngh147258@gmail.com",
@@ -32,6 +20,7 @@ defmodule GenericFinderServer.Email do
     def send(conn, email_address) do
       GenericFinderServer.Email.Email.make_email(conn, email_address)   # Create your email
       |> GenericFinderServer.Mailer.deliver_now() # Send your email
+      "ok"
     end
 
     def certification(conn, code) do
