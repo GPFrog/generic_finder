@@ -23,12 +23,17 @@ defmodule GenericFinderServer.MedicineManagement do
                 []
             )
             # IO.puts query
-            %MyXQL.Result{rows: row} = query
-            result = ""
+            %MyXQL.Result{num_rows: distinct, rows: row} = query
+            if distinct == 0 do
+                "error"
+            else
+                result = ""
             val = hd row
             #일단 row하나만 받았을 경우
             tval = List.to_tuple(val)
             Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
+            end
+            
         end
     end
 end
