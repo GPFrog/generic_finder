@@ -70,9 +70,15 @@ defmodule GenericFinderServer.MedicineManagement do
                 
                 query2 = Ecto.Adapters.SQL.query!(
                     GenericFinderServer.Repo,
-                    "SELECT Company_name, name, shape, longAxis, shortAxis, Additive_name, ActiveIngredient_name 
-                    FROM Medicine, Medicine_has_ActiveIngredient, Medicine_has_Additive, Area_has_Medicine 
-                    WHERE code=" <> code <> " AND Medicine.code=" <> code <> " AND Medicine_has_ActiveIngredient.Medicine_code=" <> code <> " AND Medicine_has_Additive.Medicine_code=" <> code <> " AND Area_has_Medicine.Medicine_code=" <> code,
+                    "select mdai.Company_name, mdai.name, mdai.shape, mdai.longAxis, mdai.shortAxis, mdai.ActiveIngredient_name, ad.Additive_name from
+                    (select code, med.Company_name, med.name, med.shape, med.longAxis, med.shortAxis, ai.ActiveIngredient_name from
+                    (select code, Company_name, name, shape, longAxis, shortAxis from Medicine where code = " <>code <> ") as med
+                    inner join
+                    (select * from Medicine_has_ActiveIngredient where Medicine_code = " <>code <> ") as ai
+                    on med.code = ai.Medicine_code) as mdai
+                    inner join
+                    (select * from Medicine_has_Additive where Medicine_code = " <>code <> ") as ad
+                    on mdai.code = ad.Medicine_code",
                     []
                 )
 
@@ -97,7 +103,9 @@ defmodule GenericFinderServer.MedicineManagement do
 
                     activeIngredient_name = isNil(elem(tval2, 6))
 
-                    name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name
+                    result = GenericFinderServer.get_med_info(code)
+
+                    name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name <> "^^" <> result
                 end
             end
         end
