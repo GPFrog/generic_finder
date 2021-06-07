@@ -62,6 +62,11 @@ defmodule Worker do
     {:reply, GenericFinderServer.MedicineManagement.MedicineLookup.medicineLookup(name), state}
   end
 
+  # 약 정보 조회 (이름, 시도, 시군구)
+  def handle_call({:medicineLookup, name, sido, sigungu}, _from, state) do
+    {:reply, GenericFinderServer.MedicineManagement.MedicineLookup.medicineLookup(name, sido, sigungu), state}
+  end
+
   # 약 정보 상세 조회
   def handle_call({:medicineDetailLookup, code}, _from, state) do
     {:reply, GenericFinderServer.MedicineManagement.MedicineDetailLookup.medicineDetailLookup(code), state}
@@ -72,18 +77,23 @@ defmodule Worker do
     {:reply, GenericFinderServer.MedicinePriceManagement.PriceEnroll.priceEnroll(email, medicine_code, price, bussiness_number), state}
   end
 
-  # # 약 가격 삭제
-  # def handle_call({:medicinePriceDelete, email, medicine_code, price, bussiness_number}, _from, state) do
-  #   {:reply, GenericFinderServer.MedicinePriceManagement.PriceDelete.priceDelete(id), state}
-  # end
+  # 약 가격 삭제
+  def handle_call({:medicinePriceDelete, email, date, bussiness_number, medicine_name, price}, _from, state) do
+    {:reply, GenericFinderServer.MedicinePriceManagement.PriceDelete.priceDelete(email, date, bussiness_number, medicine_name, price), state}
+  end
 
   # 약 가격 조회
   def handle_call({:medicinePriceLookup, medicineName}, _from, state) do
     {:reply, GenericFinderServer.MedicinePriceManagement.PriceLookup.priceLookup(medicineName), state}
   end
 
+  # 약 가격 자기 조회
+  def handle_call({:medicinePriceSelfLookup, email}, _from, state) do
+    {:reply, GenericFinderServer.MedicinePriceManagement.PriceSelfLookup.priceSelfLookup(email), state}
+  end
+
   # 약국 코드 조회
-  def handle_call({:medicine}, _from, state) do
-    {:reply, GenericFinderServer.Medicine.Medicine.getMedicine(), state}
+  def handle_call({:medicine, email}, _from, state) do
+    {:reply, GenericFinderServer.MedicinePriceManagement.PriceSelfLookup.priceSelfLookup(email), state}
   end
 end

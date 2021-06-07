@@ -21,33 +21,32 @@ defmodule GenericFinderServer.MedicinePriceManagement do
         end
     end
 
-    # defmodule PriceDelete do
-    #     def priceDelete(email, medicine_code, bussiness_number) do
-    #         #중복확인
-    #         query = Ecto.Adapters.SQL.query!(
-    #             GenericFinderServer.Repo,
-    #             "SELECT * FROM User WHERE eMail = \"" <> id <> "\" AND passwd = \"" <> password <> "\"",
-    #             []
-    #         )
+    # 날짜 약국이름 약이름 가격
+    defmodule PriceDelete do
+        def priceDelete(email, date, bussiness_number, medicine_name, price) do
+            #중복확인
+            query = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "DELETE FROM generic_finder.User_has_Medicine 
+                WHERE Medicine_code=(SELECT Medicine.code FROM Medicine WHERE name =\"" <> medicine_name <> "\") 
+                AND User_has_Medicine.registeredDate=\"" <> date <> "\" 
+                AND User_has_Medicine.Pharmacy_bussinessNumber=" <> bussiness_number <> " 
+                AND User_has_Medicine.price=" <> price <> "
+                AND User_has_Medicine.User_eMail=" <> email,
+                []
+            )
                         
-    #         %MyXQL.Result{num_rows: distinct} = query
+            %MyXQL.Result{num_rows: distinct} = query
             
-    #         IO.puts distinct
-            
-    #         unless distinct == 0 do
-    #             # 이미 존재
-    #             "duplication"
-    #         else
-    #             # 존재하지 않음
-    #             query = Ecto.Adapters.SQL.query!(
-    #                 GenericFinderServer.Repo,
-    #                 "INSERT INTO User(eMail, passwd, authority) VALUES (\""<> id <> "\", \""<> password <>"\", 1)",
-    #                 []
-    #             )
-    #             "ok"
-    #         end
-    #     end
-    # end
+            unless distinct == 0 do
+                # 성공
+                "ok"
+            else
+                # 실패
+                "error"
+            end
+        end
+    end
 
 
     # request 약 이름
@@ -75,7 +74,25 @@ defmodule GenericFinderServer.MedicinePriceManagement do
             price = elem(tuple, 1) |> Integer.to_string
             uemail = elem(tuple, 2)
 
-            bnumber <> "/" <> price <> "/" <> uemail
+            bnumber <> "/" <> price <> "/" <> uemail    
+        end
+    end
+
+    defmodule PriceSelfLookup do
+        def priceSelfLookup(email) do
+            query1 = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT registeredDate, Pharmacy_bussinessNumber, (SELECT Medicine.name FROM Medicine WHERE code=Medicine_code), price FROM generic_finder.User_has_Medicine WHERE User_eMail=\'" <> email <> "\'",
+                []
+            )
+            %MyXQL.Result{num_rows: distinct, rows: row} = query1
+            tmp = hd row
+            if distinct == 0 do
+                # 날짜 약국이름 약이름 가격
+                "error"
+            else
+                row
+            end
         end
     end
 end

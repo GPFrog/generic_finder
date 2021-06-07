@@ -1,5 +1,5 @@
 defmodule GenericFinderServer.Test do
-  @timeout 5000
+  @timeout 10000
 
 #  def crawl(i) do
 #    async_get_medicine_info(i)
@@ -88,6 +88,21 @@ defmodule GenericFinderServer.Test do
       :poolboy.transaction(
         :worker,
         fn pid -> GenServer.call(pid, {flag, i, j, k, l}) end,
+        @timeout
+      )
+    end)
+  end
+
+  def start(i, j, k, l, m, flag) do
+    async_crawl(i, j, k, l, m, flag)
+    |> await_and_inspect()
+  end
+
+  defp async_crawl(i, j, k, l, m, flag) do
+    Task.async(fn ->
+      :poolboy.transaction(
+        :worker,
+        fn pid -> GenServer.call(pid, {flag, i, j, k, l, m}) end,
         @timeout
       )
     end)

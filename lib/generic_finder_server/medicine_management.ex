@@ -32,15 +32,35 @@ defmodule GenericFinderServer.MedicineManagement do
             tval = List.to_tuple(val)
             Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
             end
-            
         end
-    end
-    
-    defmodule MedicineLookup do
+
         def medicineLookup(name) do
             query = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
-                "SELECT code, name, price FROM Medicine, Medicine_has_ActiveIngredient, Medicine_has_Symptom, Area_has_Medicine WHERE name LIKE \'%" <> name <> "%\'",
+                "SELECT Medicine.code, Medicine.name, Area_has_Medicine.price FROM Medicine, Medicine_has_ActiveIngredient, Medicine_has_Symptom, Area_has_Medicine WHERE name LIKE \'%" <> name <> "%\'",
+                []
+            )
+            # IO.puts query
+            %MyXQL.Result{num_rows: distinct, rows: row} = query
+            IO.puts row
+            if distinct == 0 do
+                "error/nameerror/1234"
+            else
+                result = ""
+            val = hd row
+            #일단 row하나만 받았을 경우
+            # tval = List.to_tuple(val)
+            # Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
+            val
+            end
+        end
+
+        def medicineLookup(name, sido, sigungu) do
+            query = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT Medicine.name, Medicine.code, Area_has_Medicine.price 
+                FROM Area_has_Medicine LEFT JOIN Medicine ON Area_has_Medicine.Medicine_code = Medicine.code 
+                WHERE Medicine.name LIKE '%" <> name <> "%' AND Area_has_Medicine.Area_Si_Do='" <> sido <> "' AND Area_has_Medicine.Area_Si_Gun_Gu=\'" <> sigungu <> "\'",
                 []
             )
             # IO.puts query
@@ -48,13 +68,12 @@ defmodule GenericFinderServer.MedicineManagement do
             if distinct == 0 do
                 "error/nameerror/1234"
             else
-                result = ""
             val = hd row
             #일단 row하나만 받았을 경우
-            tval = List.to_tuple(val)
-            Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
+            # tval = List.to_tuple(val)
+            # Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
+            row 
             end
-            
         end
     end
     
@@ -72,12 +91,53 @@ defmodule GenericFinderServer.MedicineManagement do
             if distinct == 0 do
                 "error"
             else
-            val = hd row
-            tval = List.to_tuple(val)
-            # User_eMail
-            elem(tval, 0)
-            # price
-            elem(tval, 1)
+                val = hd row
+                tval = List.to_tuple(val)
+                # User_eMail
+                user_eMail = elem(tval, 0)
+                # price
+                price = Integer.to_string(elem(tval, 1))
+                
+                query2 = Ecto.Adapters.SQL.query!(
+                    GenericFinderServer.Repo,
+                    "SELECT Company_name, name, shape, longAxis, shortAxis, Additive_name, ActiveIngredient_name 
+                    FROM Medicine, Medicine_has_ActiveIngredient, Medicine_has_Additive, Area_has_Medicine 
+                    WHERE code=" <> code <> " AND Medicine.code=" <> code <> " AND Medicine_has_ActiveIngredient.Medicine_code=" <> code <> " AND Medicine_has_Additive.Medicine_code=" <> code <> " AND Area_has_Medicine.Medicine_code=" <> code,
+                    []
+                )
+
+                %MyXQL.Result{num_rows: distinct2, rows: row2} = query2
+                if distinct2 == 0 do
+                    "error"
+                else
+                    val2 = hd row2
+                    tval2 = List.to_tuple(val2)
+
+                    company_name = isNil(elem(tval2, 0))
+
+                    name = isNil(elem(tval2, 1))
+
+                    shape = isNil(elem(tval2, 2))
+
+                    longAxis = isNil(elem(tval2, 3))
+
+                    shortAxis = isNil(elem(tval2, 4))
+
+                    additive_name = isNil(elem(tval2, 5))
+
+                    activeIngredient_name = isNil(elem(tval2, 6))
+
+                    name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name
+                end
+            end
+        end
+
+        defp isNil(value) do
+            case value do
+              nil -> true
+                ""
+              _ -> false
+                value
             end
         end
     end
