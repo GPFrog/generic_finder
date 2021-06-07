@@ -87,8 +87,13 @@ defmodule Worker do
     {:reply, GenericFinderServer.MedicinePriceManagement.PriceLookup.priceLookup(medicineName), state}
   end
 
+  # 약 가격 자기 조회
+  def handle_call({:medicinePriceSelfLookup, email}, _from, state) do
+    {:reply, GenericFinderServer.MedicinePriceManagement.PriceSelfLookup.priceSelfLookup(email), state}
+  end
+
   # 약국 코드 조회
-  def handle_call({:medicine}, _from, state) do
-    {:reply, GenericFinderServer.Medicine.Medicine.getMedicine(), state}
+  def handle_call({:medicine, email}, _from, state) do
+    {:reply, GenericFinderServer.MedicinePriceManagement.PriceSelfLookup.priceSelfLookup(email), state}
   end
 end

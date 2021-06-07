@@ -48,6 +48,8 @@ defmodule GenericFinderServerWeb.Router do
 
     get "/medicinePriceLookup", PageController, :medicinePriceLookup
 
+    get "/medicinePriceSelfLookup", PageController, :medicinePriceSelfLookup
+
     get "/pharmacy", PageController, :getPharmacyInfo
   end
   

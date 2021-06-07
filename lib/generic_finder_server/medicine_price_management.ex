@@ -75,7 +75,25 @@ defmodule GenericFinderServer.MedicinePriceManagement do
             price = elem(tuple, 1) |> Integer.to_string
             uemail = elem(tuple, 2)
 
-            bnumber <> "/" <> price <> "/" <> uemail
+            bnumber <> "/" <> price <> "/" <> uemail    
+        end
+    end
+
+    defmodule PriceSelfLookup do
+        def priceSelfLookup(email) do
+            query1 = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT registeredDate, Pharmacy_bussinessNumber, (SELECT Medicine.name FROM Medicine WHERE code=Medicine_code), price FROM generic_finder.User_has_Medicine WHERE User_eMail=\'" <> email <> "\'",
+                []
+            )
+            %MyXQL.Result{num_rows: distinct, rows: row} = query1
+            tmp = hd row
+            if distinct == 0 do
+                # 날짜 약국이름 약이름 가격
+                "error"
+            else
+                row
+            end
         end
     end
 end
