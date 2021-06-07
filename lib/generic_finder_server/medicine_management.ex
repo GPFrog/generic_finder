@@ -33,9 +33,7 @@ defmodule GenericFinderServer.MedicineManagement do
             Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
             end
         end
-    end
-    
-    defmodule MedicineLookup do
+
         def medicineLookup(name) do
             query = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
@@ -54,6 +52,27 @@ defmodule GenericFinderServer.MedicineManagement do
             # tval = List.to_tuple(val)
             # Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
             val
+            end
+        end
+
+        def medicineLookup(name, sido, sigungu) do
+            query = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT Medicine.name, Medicine.code, Area_has_Medicine.price 
+                FROM Area_has_Medicine LEFT JOIN Medicine ON Area_has_Medicine.Medicine_code = Medicine.code 
+                WHERE Medicine.name LIKE '%" <> name <> "%' AND Area_has_Medicine.Area_Si_Do='" <> sido <> "' AND Area_has_Medicine.Area_Si_Gun_Gu=\'" <> sigungu <> "\'",
+                []
+            )
+            # IO.puts query
+            %MyXQL.Result{num_rows: distinct, rows: row} = query
+            if distinct == 0 do
+                "error/nameerror/1234"
+            else
+            val = hd row
+            #일단 row하나만 받았을 경우
+            # tval = List.to_tuple(val)
+            # Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
+            row 
             end
         end
     end
@@ -108,7 +127,7 @@ defmodule GenericFinderServer.MedicineManagement do
 
                     activeIngredient_name = isNil(elem(tval2, 6))
 
-                    name <> "/" <> company_name <> "/" <> shape <> "/" <> longAxis <> "/" <> shortAxis <> "/" <> additive_name <> "/" <> activeIngredient_name
+                    name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name
                 end
             end
         end
