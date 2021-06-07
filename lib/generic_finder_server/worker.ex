@@ -53,8 +53,8 @@ defmodule Worker do
   end
 
   # 약 정보 조회
-  def handle_call({:medicineLookup, name, activeingredient, company, symptom}, _from, state) do
-    {:reply, GenericFinderServer.MedicineManagement.MedicineLookup.medicineLookup(name, activeingredient, company, symptom), state}
+  def handle_call({:medicineLookup, name, activeingredient, company, symptom, si_do, si_gun_gu}, _from, state) do
+    {:reply, GenericFinderServer.MedicineManagement.MedicineLookup.medicineLookup(name, activeingredient, company, symptom, si_do, si_gun_gu), state}
   end
 
   # 약 정보 조회 (이름)
