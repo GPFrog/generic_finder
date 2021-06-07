@@ -25,12 +25,20 @@ defmodule GenericFinderServer do
   def get_med_info(itemSeq) do
     response = Crawly.fetch(medicine_url()<>itemSeq)
     {:ok, document} = Floki.parse_document(response.body)
-    (document |> Floki.find(".s-dr_table.dr_table_type1 tr") |> Floki.text()) #기본 정보
-    <> (document |> Floki.find(".note") |> Floki.text()) #유효성분
-    <> (document |> Floki.find("#_ee_doc") |> Floki.text()) #효능효과
-    <> (document |> Floki.find("#_ud_doc") |> Floki.text()) #용법용량
-    <> (document |> Floki.find("#_nb_doc") |> Floki.text()) #사용상주의사항
-    <> ((document |> Floki.find(".pc-img img") |> Floki.raw_html()) |> get_base64_link())
+#    (document |> Floki.find(".s-dr_table.dr_table_type1 tr") |> Floki.text()) #기본 정보
+#    (document |> Floki.find(".note") |> Floki.text()) #유효성분
+    (document |> Floki.find("#_ud_doc") |> Floki.text()) <> #용법용량(복용법)
+    "^^" <> (document |> Floki.find("#_nb_doc") |> Floki.text()) <> #사용상주의사항
+    "^^" <> (document |> Floki.find("tr") |> Floki.text() |> String.split("사용기간") |> tl |> hd |> String.split("재심사대상") |> hd) <> #사용기간
+    "^^" <> (document |> Floki.find("tr") |> Floki.text() |> String.split("포장정보") |> tl |> hd |> String.split("보험약가") |> hd) <> #포장정보
+    "^^" <> ((document |> Floki.find(".pc-img img") |> Floki.raw_html()) |> get_base64_link()) #사진
+#   <> (document |> Floki.find("#_ee_doc") |> Floki.text()) #효능효과
+  end
+
+  def get_shelf_life(itemSeq) do
+    response = Crawly.fetch(medicine_url()<>itemSeq)
+    {:ok, document} = Floki.parse_document(response.body)
+    (document |> Floki.find("#_nb_doc") |> Floki.text()) #사용상주의사항
   end
 
   def get_pharm_info(businessNum) do
