@@ -103,6 +103,10 @@ defmodule GenericFinderServer.Test do
       :poolboy.transaction(
         :worker,
         fn pid -> GenServer.call(pid, {flag, i, j, k, l, m}) end,
+        @timeout
+      )
+    end)
+  end
 
   def start(i, j, k, l, g, h, flag) do
     async_crawl(i, j, k, l, g, h, flag)
