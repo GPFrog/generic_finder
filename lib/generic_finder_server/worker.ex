@@ -9,11 +9,13 @@ defmodule Worker do
     {:ok, nil}
   end
 
+  #약 상세정보 조회
   def handle_call({:medicine, medKey}, _from, state) do
     IO.puts("process #{inspect(self)} fetching medicine number: #{medKey}")
     {:reply, GenericFinderServer.get_med_info(medKey), state}
   end
 
+  #사업자번호로 약국 찾기
   def handle_call({:pharmacy, businessNum}, _from, state) do
     IO.puts("process #{inspect(self)} fetching pharmacy businessNumber: #{businessNum}")
     {:reply, GenericFinderServer.get_pharm_info(businessNum), state}

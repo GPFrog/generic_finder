@@ -44,10 +44,14 @@ defmodule GenericFinderServerWeb.PageController do
     json conn, GenericFinderServer.Test.start(id, :blacklist)
   end
 
-  # def medicineDetail(conn, %{"medicineCode" => medicineCode}) do
-  #   json conn, GenericFinderServer.Test.start(medicineCode, :medicine)
-  #   #json conn, GenericFinderServer.get_med_info(medicineCode)
-  # end
+   def medicineDetail(conn, %{"medicineCode" => medicineCode}) do
+     json conn, GenericFinderServer.Test.start(medicineCode, :medicine)
+     #json conn, GenericFinderServer.get_med_info(medicineCode)
+   end
+
+  def getPharmacyInfo(conn, %{"businessNum" => businessNum}) do
+    json conn, GenericFinderServer.Test.start(businessNum, :pharmacy)
+  end
 
   def medicine(conn, _params) do
     json conn, GenericFinderServer.Test.start(:medicine)

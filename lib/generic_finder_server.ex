@@ -30,6 +30,7 @@ defmodule GenericFinderServer do
     <> (document |> Floki.find("#_ee_doc") |> Floki.text()) #효능효과
     <> (document |> Floki.find("#_ud_doc") |> Floki.text()) #용법용량
     <> (document |> Floki.find("#_nb_doc") |> Floki.text()) #사용상주의사항
+    <> ((document |> Floki.find(".pc-img img") |> Floki.raw_html()) |> get_base64_link())
   end
 
   def get_pharm_info(businessNum) do
