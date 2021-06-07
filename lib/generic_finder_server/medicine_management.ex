@@ -25,7 +25,7 @@ defmodule GenericFinderServer.MedicineManagement do
             # IO.puts query
             %MyXQL.Result{num_rows: distinct, rows: row} = query
             if distinct == 0 do
-                "error"
+                "error/error/1234"
             else
                 result = ""
             val = hd row
