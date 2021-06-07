@@ -77,10 +77,10 @@ defmodule Worker do
     {:reply, GenericFinderServer.MedicinePriceManagement.PriceEnroll.priceEnroll(email, medicine_code, price, bussiness_number), state}
   end
 
-  # # 약 가격 삭제
-  # def handle_call({:medicinePriceDelete, email, medicine_code, price, bussiness_number}, _from, state) do
-  #   {:reply, GenericFinderServer.MedicinePriceManagement.PriceDelete.priceDelete(id), state}
-  # end
+  # 약 가격 삭제
+  def handle_call({:medicinePriceDelete, email, date, bussiness_number, medicine_name, price}, _from, state) do
+    {:reply, GenericFinderServer.MedicinePriceManagement.PriceDelete.priceDelete(email, date, bussiness_number, medicine_name, price), state}
+  end
 
   # 약 가격 조회
   def handle_call({:medicinePriceLookup, medicineName}, _from, state) do

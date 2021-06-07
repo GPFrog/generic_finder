@@ -77,9 +77,9 @@ defmodule GenericFinderServerWeb.PageController do
     json conn, GenericFinderServer.Test.start(email, medicine_code, price, bussiness_number, :medicinePriceEnroll)
   end
 
-  # def medicinePriceDelete()do
-  #   json conn, GenericFinderServer.Test.start(medicineCode, :medicinePriceDelete)
-  # end
+  def medicinePriceDelete(conn, %{"email" => email, "date" => date, "bussiness" => bussiness, "name" => name, "price" => price})do
+    json conn, GenericFinderServer.Test.start(email, date, bussiness, name, price, :medicinePriceDelete)
+  end
 
   def medicinePriceLookup(conn, %{"medicineName" => medicineName}) do
     json conn, GenericFinderServer.Test.start(medicineName, :medicinePriceLookup)
