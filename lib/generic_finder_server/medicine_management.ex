@@ -35,14 +35,14 @@ defmodule GenericFinderServer.MedicineManagement do
             )
             # IO.puts query
             %MyXQL.Result{num_rows: distinct, rows: row} = query
+
+            IO.puts distinct
             if distinct == 0 do
                 "error/error/1234"
             else
-                result = ""
-            val = hd row
+            row
             #일단 row하나만 받았을 경우
-            tval = List.to_tuple(val)
-            Integer.to_string(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
+            # tval = Liststring(elem(tval,0)) <> "/" <> elem(tval,1) <> "/" <> Integer.to_string(elem(tval,2))
             end
         end
     end
@@ -61,7 +61,7 @@ defmodule GenericFinderServer.MedicineManagement do
             if distinct == 0 do
                 "error"
             else
-                val = hd row
+                val = hd row    
                 tval = List.to_tuple(val)
                 # User_eMail
                 user_eMail = elem(tval, 0)
