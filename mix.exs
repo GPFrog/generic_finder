@@ -49,6 +49,7 @@ defmodule GenericFinderServer.MixProject do
       {:gettext, "~> 0.11"},
       #json처리용
       {:json, "~> 1.4"},
+      {:jason, "~> 1.2"},
       {:poison, "~> 3.1", override: true},
       {:plug_cowboy, "~> 2.0"},
       {:crawly, "~> 0.13.0"},
