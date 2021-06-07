@@ -1,5 +1,5 @@
 defmodule GenericFinderServer.Test do
-  @timeout 5000
+  @timeout 10000
 
 #  def crawl(i) do
 #    async_get_medicine_info(i)
