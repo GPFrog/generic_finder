@@ -105,7 +105,7 @@ defmodule GenericFinderServer.MedicineManagement do
 
                     result = GenericFinderServer.get_med_info(code)
 
-                    view = name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name <> "^^" <> result
+                    view = name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name <> "^^" <> price <> "^^" <> result
                 end
             end
         end
