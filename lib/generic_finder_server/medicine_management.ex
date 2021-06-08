@@ -68,6 +68,20 @@ defmodule GenericFinderServer.MedicineManagement do
                 # price
                 price = Integer.to_string(elem(tval, 1))
                 
+
+                que = Ecto.Adapters.SQL.query!(
+                    GenericFinderServer.Repo,
+                    "select uhm.price, uhm.registeredDate, ph.address from
+                    (select * from User_has_Medicine where Medicine_code = " <> code <> ") as uhm 
+                    inner join 
+                    (select * from Pharmacy where Area_Si_Do = \"경상북도\" and Area_Si_Gun_Gu = \"구미시\") as ph 
+                    on uhm.Pharmacy_bussinessNumber = ph.bussinessNumber",
+                    []
+                )
+
+
+
+
                 query2 = Ecto.Adapters.SQL.query!(
                     GenericFinderServer.Repo,
                     "select mdai.Company_name, mdai.name, mdai.shape, mdai.longAxis, mdai.shortAxis, mdai.ActiveIngredient_name, ad.Additive_name from
@@ -81,7 +95,7 @@ defmodule GenericFinderServer.MedicineManagement do
                     on mdai.code = ad.Medicine_code",
                     []
                 )
-
+            
                 %MyXQL.Result{num_rows: distinct2, rows: row2} = query2
                 if distinct2 == 0 do
                     "error"
