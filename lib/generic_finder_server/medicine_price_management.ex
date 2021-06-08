@@ -25,10 +25,18 @@ defmodule GenericFinderServer.MedicinePriceManagement do
     defmodule PriceDelete do
         def priceDelete(email, date, bussiness_number, medicine_name, price) do
             #중복확인
+            que = Ecto.Adapters.SQL.query!(
+                GenericFinderServer.Repo,
+                "SELECT code FROM Medicine WHERE name=\"" <> medicine_name <> "\"",
+                []
+            )
+            %MyXQL.Result{num_rows: distinct, rows: row} = que
+            tmp = hd row
+
             query = Ecto.Adapters.SQL.query!(
                 GenericFinderServer.Repo,
                 "DELETE FROM generic_finder.User_has_Medicine 
-                WHERE Medicine_code=(SELECT Medicine.code FROM Medicine WHERE name =\"" <> medicine_name <> "\") 
+                WHERE Medicine_code=(SELECT Medicine.code FROM Medicine WHERE name =\"" <> tmp <> "\") 
                 AND User_has_Medicine.registeredDate=\"" <> date <> "\" 
                 AND User_has_Medicine.Pharmacy_bussinessNumber=" <> bussiness_number <> " 
                 AND User_has_Medicine.price=" <> price <> "
@@ -37,7 +45,8 @@ defmodule GenericFinderServer.MedicinePriceManagement do
             )
                         
             %MyXQL.Result{num_rows: distinct} = query
-            
+
+
             unless distinct == 0 do
                 # 성공
                 "ok"
