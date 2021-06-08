@@ -49,7 +49,7 @@ defmodule GenericFinderServer.MedicineManagement do
     
 
     # 코드받기
-    # 사진, 의약품명, 제조사, 약품모양, 장축, 단축, 성분, 효능, 복용법, 주의사항, 유통기한, 포장정보, 지역평균가격, 사용자등록가격[리스트]
+    # 사진, 의약품명, 제조사, 약품모양, 장축, 단축, 성분, 효능, 복용법, 주의사항, 유통기한, 포장정보, / 지역평균가격, / 사용자등록가격[리스트]
     defmodule MedicineDetailLookup do
         def medicineDetailLookup(code) do
             query = Ecto.Adapters.SQL.query!(
@@ -105,7 +105,7 @@ defmodule GenericFinderServer.MedicineManagement do
 
                     result = GenericFinderServer.get_med_info(code)
 
-                    name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name <> "^^" <> result
+                    view = name <> "^^" <> company_name <> "^^" <> shape <> "^^" <> longAxis <> "^^" <> shortAxis <> "^^" <> additive_name <> "^^" <> activeIngredient_name <> "^^" <> result
                 end
             end
         end
