@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :generic_finder_server, GenericFinderServer.Repo,
-  username: "dsh",
-  password: "dsh12",
+  username: "",
+  password: "",
   database: "generic_finder",
-  hostname: "193.123.244.100",
+  hostname: "",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -17,7 +17,7 @@ config :generic_finder_server, GenericFinderServer.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :generic_finder_server, GenericFinderServerWeb.Endpoint,
-  http: [port: 2833, ip: {192,168,0,3}],
+  http: [port: , ip: {}],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
